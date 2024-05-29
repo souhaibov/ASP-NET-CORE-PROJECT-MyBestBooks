@@ -1,0 +1,101 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MyBestBooks.Models;
+
+namespace MyBestBooks.DataAccess.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+
+                new Category { Id = 2, Name = "Helmi", DisplayOrder = 22 },
+                new Category { Id = 4, Name = "souhaib", DisplayOrder = 2 }
+                );
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = 1,
+                    Title = "Dvoretsky : the end game",
+                    Author = "Chihemak fih",
+                    Description = "7aja ma tafhamhech akid",
+                    ISBN = "CHESS0055",
+                    ListPrice = 99,
+                    Price = 90,
+                    Price50 = 85,
+                    Price100 = 80,
+                    CategoryId = 2,
+                    ImageUrl = ""
+                },
+                new Product
+                {
+                    Id = 2,
+                    Title = "Dvoretsky : the middle game",
+                    Author = "Chihemak fih",
+                    Description = "7aja ma tafhamhech akid",
+                    ISBN = "CHESS0055",
+                    ListPrice = 99,
+                    Price = 90,
+                    Price50 = 85,
+                    Price100 = 80,
+                    CategoryId = 2,
+                    ImageUrl = ""
+                },
+                new Product
+                {
+                    Id = 3,
+                    Title = "Dvoretsky : Understanding the strategy",
+                    Author = "Chihemak fih",
+                    Description = "7aja ma tafhamhech akid",
+                    ISBN = "CHESS0055",
+                    ListPrice = 99,
+                    Price = 90,
+                    Price50 = 85,
+                    Price100 = 80,
+                    CategoryId = 2,
+                    ImageUrl = ""
+                },
+                new Product
+                {
+                    Id = 4,
+                    Title = "Dvoretsky : the right tactic",
+                    Author = "Chihemak fih",
+                    Description = "7aja ma tafhamhech akid",
+                    ISBN = "CHESS0055",
+                    ListPrice = 99,
+                    Price = 90,
+                    Price50 = 85,
+                    Price100 = 80,
+                    CategoryId = 4,
+                    ImageUrl = ""
+                },
+                new Product
+                {
+                    Id = 5,
+                    Title = "Dvoretsky : The rules of the opening",
+                    Author = "Chihemak fih",
+                    Description = "7aja ma tafhamhech akid",
+                    ISBN = "CHESS0055",
+                    ListPrice = 99,
+                    Price = 90,
+                    Price50 = 85,
+                    Price100 = 80,
+                    CategoryId = 4,
+                    ImageUrl = ""
+                }
+                );
+
+
+
+        }
+
+    }
+}
