@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyBestBooks.DataAccess.Data;
 using MyBestBooks.DataAccess.Repository;
@@ -13,6 +14,8 @@ builder.Services.AddDbContext /* this is the Dbcontext that's there in the frame
     options /*we can use anything we want option or o or anything*/ => options.UseSqlServer
     /* when we use the sql server we have to define the connection string right here... (from the appsetting.json) */
     (builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -30,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); // authentification shoul always come before authorization
 app.UseAuthorization();
 
 app.MapControllerRoute(
