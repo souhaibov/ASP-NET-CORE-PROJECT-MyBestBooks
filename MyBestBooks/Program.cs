@@ -3,6 +3,8 @@ using MyBestBooks.DataAccess.Data;
 using MyBestBooks.DataAccess.Repository;
 using MyBestBooks.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using MyBestBooks.Utility;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,13 +17,17 @@ builder.Services.AddDbContext /* this is the Dbcontext that's there in the frame
     /* when we use the sql server we have to define the connection string right here... (from the appsetting.json) */
     (builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+               // with the previous particular line we have added roles(admin-customer-...) to our identity and that's
+               // included in our project now. now we can display all the available roles but we need to seed those roles
+               // we should check that (if we already have rule) in the GetHandler (OnGetAsync) in the register class
 builder.Services.AddRazorPages(); // until now our application is supporting onle the MVC pages...
                                   // with this line here it will support the razor pages too.
                                   // all the identity pages are done with razor. so it should support the razor pages to map it (line 43)
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
+// once we have the implementation of EmailSender (In the Utility folder) all we have to do is to register that in our services (like for UnitOfWork)
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
