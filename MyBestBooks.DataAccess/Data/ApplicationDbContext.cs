@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyBestBooks.Models;
 
 namespace MyBestBooks.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -15,6 +16,9 @@ namespace MyBestBooks.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder); // that's because key's of itdentity tables are mapped in the OnModelCreating and if this particular method is not called... it will generate errors about necessary key
+
             modelBuilder.Entity<Category>().HasData(
 
                 new Category { Id = 2, Name = "Helmi", DisplayOrder = 22 },

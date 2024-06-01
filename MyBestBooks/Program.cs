@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyBestBooks.DataAccess.Data;
 using MyBestBooks.DataAccess.Repository;
 using MyBestBooks.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +16,12 @@ builder.Services.AddDbContext /* this is the Dbcontext that's there in the frame
     (builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
-
+builder.Services.AddRazorPages(); // until now our application is supporting onle the MVC pages...
+                                  // with this line here it will support the razor pages too.
+                                  // all the identity pages are done with razor. so it should support the razor pages to map it (line 43)
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 var app = builder.Build();
 
@@ -33,8 +37,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication(); // authentification shoul always come before authorization
+app.UseAuthentication(); // the authorization should always be before the authorization
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
