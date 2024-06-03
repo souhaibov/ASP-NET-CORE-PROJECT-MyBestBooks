@@ -101,14 +101,16 @@ namespace MyBestBooks.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             [Required]
-            public string? Name { get; set; }
-			public string? City { get; set; }
-			public string? State { get; set; }
-			public string? PostalCode { get; set; }
-			public string? PhoneNumber { get; set; }
-			public string? StreetAddress { get; set; }
+			public string Name { get; set; }
+			public string FirstName { get; set; }
+			public string LastName { get; set; }
+			public string City { get; set; }
+			public string State { get; set; }
+			public int PostalCode { get; set; }
+			public int PhoneNumber { get; set; }
+			public string StreetAddress { get; set; }
 
-			public string? Role { get; set; } // creating a property for rule. we need a dropdown list of Roles.
+			public string Role { get; set; } // creating a property for rule. we need a dropdown list of Roles.
                                               // for that we need an IENumerable of SelectListItem
             [ValidateNever]
             public IEnumerable<SelectListItem > RoleList { get; set; }
@@ -156,12 +158,11 @@ namespace MyBestBooks.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.Name = Input.Name;
+				
 				user.City = Input.City;
 				user.State = Input.State;
-				user.PhoneNumber = Input.PhoneNumber;
-				user.PostalCode = Input.PostalCode;
+				user.PostalCode = Input.PostalCode.ToString();
 				
-
 				var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

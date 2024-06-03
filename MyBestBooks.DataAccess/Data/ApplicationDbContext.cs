@@ -15,7 +15,7 @@ namespace MyBestBooks.DataAccess.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } // to can modify the users table that exists automatically in the database
                                                                      // after the Identity package. needed for the migration...like with product and Category
-                                                                     // not with AddIdentityUser but with ExtendIdentityUser (bec it's already exists)
+                                                                     // not with AddIdentityUser but with ExtendIdentityUser (we can name it whatever we want)
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
