@@ -13,11 +13,13 @@ namespace MyBestBooks.Models
                                                 // in the identity tables. like adding some information that don't exist.
                                                 // to do that, we need to create that new model
     {
-        [Required]
-        public int Name { get; set; }
+
+		[Required]
+        public string Name { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
-    }
+		public string? PostalCode { get; set; }
+	}
    
 }
 //  now we have to add a mapper for that to can add that to migration. (in the ApplicationDBContext)

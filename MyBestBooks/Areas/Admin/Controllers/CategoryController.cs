@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBestBooks.DataAccess.Repository.IRepository;
+using MyBestBooks.Utility;
 
 
 namespace MyBestBooks.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)] // that line to allow only the Admin to modify our content
+                                       // (Not someone who have the path when we do copy paste to the Url).
+                                       // we can give this authorization to every action for category instead of this line
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

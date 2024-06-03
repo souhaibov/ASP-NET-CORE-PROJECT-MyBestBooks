@@ -18,9 +18,18 @@ builder.Services.AddDbContext /* this is the Dbcontext that's there in the frame
     (builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-               // with the previous particular line we have added roles(admin-customer-...) to our identity and that's
-               // included in our project now. now we can display all the available roles but we need to seed those roles
-               // we should check that (if we already have rule) in the GetHandler (OnGetAsync) in the register class
+// with the previous particular line we have added roles(admin-customer-...) to our identity and that's
+// included in our project now. now we can display all the available roles but we need to seed those roles
+// we should check that (if we already have rule) in the GetHandler (OnGetAsync) in the register class
+
+// ConfigureApplicationCookie is needed to show the denied access message to someone who wants to access
+// to the admin panel (for example)... it will not work only after the AddIdentity Service
+builder.Services.ConfigureApplicationCookie(options => {
+	options.LoginPath = $"/Identity/Account/Login";
+	options.LogoutPath = $"/Identity/Account/Logout";
+	options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
 builder.Services.AddRazorPages(); // until now our application is supporting onle the MVC pages...
                                   // with this line here it will support the razor pages too.
                                   // all the identity pages are done with razor. so it should support the razor pages to map it (line 43)
