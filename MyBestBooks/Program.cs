@@ -38,6 +38,13 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // once we have the implementation of EmailSender (In the Utility folder) all we have to do is to register that in our services (like for UnitOfWork)
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+// needed for the register via facebook. it should be before the app builder
+builder.Services.AddAuthentication().AddFacebook(opt=>
+{
+    opt.ClientId = "1185734902603638";
+    opt.ClientSecret = "444091cf99dcf7183e39424bb26fecc7";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
