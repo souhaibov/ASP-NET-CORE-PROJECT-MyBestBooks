@@ -16,16 +16,18 @@
 					<h3 class="border-bottom pb-3 mb-4 text-body-secondary text-center">Create a new account</h3>
 					<hr />
 					<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+					
+					<div class="form-floating mb-3 col-6">
+						<input asp-for="Input.UserName" class="form-control" placeholder="UserName" />
+						<label asp-for="Input.UserName" class="ms-3">User Name</label>
+						<span asp-validation-for="Input.UserName" class="text-danger"></span>
+					</div>
 					<div class="form-floating mb-3 col-6">
 						<input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
 						<label asp-for="Input.Email" class="ms-3">Email</label>
 						<span asp-validation-for="Input.Email" class="text-danger"></span>
 					</div>
-					<div class="form-floating mb-3 col-6">
-						<input asp-for="Input.Name" class="form-control" placeholder="Name" />
-						<label asp-for="Input.Name" class="ms-3">User Name</label>
-						<span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
-					</div>
+					
 					
 					<div class="form-floating mb-3 col-md-6">
 						<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
@@ -37,6 +39,11 @@
 						<label asp-for="Input.ConfirmPassword" class="ms-3">Confirm Password</label>
 						<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
 					</div>
+					@* <div class="form-floating mb-3 col-md-6">
+						<input asp-for="Input.Name" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Name" />
+						<label asp-for="Input.Name" class="ms-3">Name</label>
+						<span asp-validation-for="Input.Name" class="text-danger"></span>
+					</div> *@
 					<div class="form-floating mb-3 col-6">
 						<input asp-for="Input.PhoneNumber" class="form-control" autocomplete="username" aria-required="true" placeholder="PhoneNumber" />
 						<label asp-for="Input.PhoneNumber" class="ms-3">PhoneNumber</label>
