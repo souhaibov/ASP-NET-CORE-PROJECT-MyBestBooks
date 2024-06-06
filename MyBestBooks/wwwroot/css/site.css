@@ -1,3 +1,11 @@
+#tblData_filter input {
+   background-color:rebeccapurple;
+    color: white;
+}
+#tblData_length select {
+    background-color: rebeccapurple;
+    color: white;
+}
 
 .divider-text:before,
 .divider-text:after 
